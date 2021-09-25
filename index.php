@@ -4,12 +4,21 @@ session_start();
 // Including Database connection
 require_once "pdo.php";
 
+
 if (isset($_SESSION['test'])) {
   echo $_SESSION['test'];
 }
 
 print_r ($_SESSION);
+echo ('<br>');
+print_r ($_POST);
 
+if (isset($_POST['filmname'])) {
+  $_SESSION['filmname'] = $_POST['filmname'];
+
+  header("Location: search_api.php");        
+  return;
+}
 
 ?>
 
@@ -74,9 +83,16 @@ print_r ($_SESSION);
         </div>
       </div>
     </div>
-    <form>
-      <input>search</input>
+
+    
+    <div>
+    <form method="POST">
+    <label for="name">Film name</label>
+    <input type="text" name="filmname" id="search_1" value=""><br/>
+    <input type="submit" name="search" value="Search">
     </form>
+
+    </div>
 
   </body>
 </html>
