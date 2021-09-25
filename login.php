@@ -60,7 +60,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         return;
     }
     if ( $row == false) {
-        $_SESSION['error'] = "No user data found...!";
+        $_SESSION['error'] = "Error while logging in... \n Either no user data found, or wrong password!";
         echo("Fehler\n");
         $_SESSION['hash'] = $check;
         header('Location: login.php');

@@ -49,6 +49,8 @@ print_r ($_SESSION);
     if (!isset($_SESSION['name'])) {
       
       echo '<a href="login.php"><p>Please log in to use the application</p></a>';
+
+      echo '<a href = "register.php"><p>No account yet? Register here</p></a>';
       die;
     }
     else {
