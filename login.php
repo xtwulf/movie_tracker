@@ -40,7 +40,9 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     // Login
     $salt = 'XyZzy12*_';
     $check = hash('md5', $salt.$_POST['pass']);
-    $check = "2ab943ddc6a8691a26be4f0e1f4e3763";
+    echo ("hash:".$check);
+    
+    //$check = "2ab943ddc6a8691a26be4f0e1f4e3763";
     echo("PW HAsh:".$check);
     $stmt = $pdo->prepare('SELECT id, username FROM users WHERE username = :un AND password = :pw');
     $stmt->execute(array( ':un' => $_POST['user'], ':pw' => $check));
@@ -60,7 +62,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     if ( $row == false) {
         $_SESSION['error'] = "No user data found...!";
         echo("Fehler\n");
-        print_r($row);
+        $_SESSION['hash'] = $check;
         header('Location: login.php');
         return;
     }
