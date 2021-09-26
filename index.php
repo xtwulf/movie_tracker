@@ -67,6 +67,23 @@ if (isset($_POST['filmname'])) {
     }
     ?>
     </div>
+
+        
+    <div>
+      <form method="POST">
+      <label for="name">Film name</label>
+      <input type="text" name="filmname" id="search_1" value=""><br/>
+      <input type="submit" name="search" value="Search">
+      <?php
+      if (isset($_SESSION['api_error'])) {
+        echo ($_SESSION['api_error']);
+      }
+
+      
+
+      ?>
+      </form>
+    </div>
     <div>My films</div>
 
     <div class="container">
@@ -79,30 +96,18 @@ if (isset($_POST['filmname'])) {
 
       ?>
       <div class="card" style="width: 18rem;">
-      <img src="https://m.media-amazon.com/images/M/MV5BMGE1ZTQ0ZTEtZTEwZS00NWE0LTlmMDUtMTE1ZWJiZTYzZTQ2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <img src="https://m.media-amazon.com/images/M/MV5BMTI5Mjg1MzM4NF5BMl5BanBnXkFtZTcwNTAyNzUzMw@@._V1_SX300.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">Rambo</h5>
+        <p class="card-text">In Thailand, John Rambo joins a group of mercenaries to venture into war-torn Burma, and rescue a group of Christian aid workers who were kidnapped by the ruthless local infantry unit.</p>
+        <a href="#" class="btn btn-primary"><button>Go to detail page</button></a>
+        <a href="#" class="btn btn-primary"><button>remove from favorites</button></a>
+        
       </div>
     </div>
     </div>
 
-    
-    <div>
-    <form method="POST">
-    <label for="name">Film name</label>
-    <input type="text" name="filmname" id="search_1" value=""><br/>
-    <input type="submit" name="search" value="Search">
-    <?php
-    if (isset($_SESSION['api_error'])) {
-      echo ($_SESSION['api_error']);
-    }
 
-    ?>
-    </form>
-
-    </div>
 
   </body>
 </html>

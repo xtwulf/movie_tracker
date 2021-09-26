@@ -1,7 +1,21 @@
 <?php
+include ('settings.php');
+
 session_start();
-print_r ($_SESSION);
-echo ("<br>");
+
+if ($debug) {
+    print_r ($_SESSION);
+    echo ("<br>");
+    print_r ($_POST);
+    
+}
+
+// Redirect the browser to index.php if Cancel is pressed
+if ( isset($_POST['cancel'] ) ) {
+    header("Location: index.php");
+    return;
+}
+
 function executeRESTCall($methode, $adresse, $daten = false) {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $adresse);
@@ -40,12 +54,25 @@ function executeRESTCall($methode, $adresse, $daten = false) {
         
         }
 
-        print_r($result);
-        echo ('<br>');
-        print_r($result['Title']);
+        if ($debug) {
+            print_r($result);
+            die;
+        }
+
+        foreach ($result as $key => $value) {
+            if (in_array($key, $display)) {
+                echo ($key . ':' . $value .'<br>');
+             }
+
+        }      
+        $_SESSION[search_result] = $result;
+    
 
     ?>
-    
+<form method="POST">
+    <input type="submit" value="Save Film">
+    <input type="submit" name="cancel" value="Cancel">
+</form>
 
 </body>
 </html>

@@ -118,12 +118,12 @@ function doValidate() {
     }
 ?>
 <form method="POST">
-<label for="name">Username (Mail adress)</label>
-<input type="text" name="user" id="1d_1" value="test@movietracker.com"><br/>
-<label for="id_1723">Password</label>
-<input type="text" name="pass" id="id_1723" value="movie1234!"><br/>
-<input type="submit" onclick="return doValidate();" value="Log In">
-<input type="submit" name="cancel" value="Cancel">
+    <label for="name">Username (Mail adress)</label>
+    <input type="text" name="user" id="1d_1" value="test@movietracker.com"><br/>
+    <label for="id_1723">Password</label>
+    <input type="text" name="pass" id="id_1723" value="movie1234!"><br/>
+    <input type="submit" onclick="return doValidate();" value="Log In">
+    <input type="submit" name="cancel" value="Cancel">
 </form>
 
 </div>
