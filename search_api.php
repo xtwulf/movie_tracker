@@ -29,9 +29,21 @@ function executeRESTCall($methode, $adresse, $daten = false) {
 <body>
     <?php
         $filmname = $_SESSION['filmname'];
-        $result = executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full');
+        $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'), true));
         // echo (executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'));
-        var_dump($result);
+        // var_dump(json_decode($result ,true));
+
+        if ($result['Response'] == "False") {
+            echo ($result['Error']);
+            $_SESSION['api_error'] = $result['Error'];
+            header('location: index.php');
+        
+        }
+
+        print_r($result);
+        echo ('<br>');
+        print_r($result['Title']);
+
     ?>
     
 
