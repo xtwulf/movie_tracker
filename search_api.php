@@ -1,5 +1,6 @@
 <?php
 include ('settings.php');
+echo("Debug: ".$debug);
 
 session_start();
 
@@ -45,7 +46,12 @@ function executeRESTCall($methode, $adresse, $daten = false) {
         $filmname = $_SESSION['filmname'];
         $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'), true));
         // echo (executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'));
-        // var_dump(json_decode($result ,true));
+        if ($debug) {
+            echo ('$result: ');
+            print_r($result);
+            echo('<br>');
+            var_dump($result ,true);
+        }
 
         if ($result['Response'] == "False") {
             echo ($result['Error']);
@@ -54,10 +60,7 @@ function executeRESTCall($methode, $adresse, $daten = false) {
         
         }
 
-        if ($debug) {
-            print_r($result);
-            die;
-        }
+     
 
         foreach ($result as $key => $value) {
             if (in_array($key, $display)) {
@@ -65,7 +68,7 @@ function executeRESTCall($methode, $adresse, $daten = false) {
              }
 
         }      
-        $_SESSION[search_result] = $result;
+        $_SESSION['search_result'] = $result;
     
 
     ?>

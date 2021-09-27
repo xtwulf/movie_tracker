@@ -14,8 +14,7 @@ echo ('<br>');
 print_r ($_POST);
 
 if (isset($_POST['filmname'])) {
-  $_SESSION['filmname'] = $_POST['filmname'];
-
+  $_SESSION['filmname'] = str_replace(' ','+',$_POST['filmname']);
   header("Location: search_api.php");        
   return;
 }
