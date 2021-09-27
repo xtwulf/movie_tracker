@@ -76,6 +76,8 @@ if (isset($_POST['filmname'])) {
       <?php
       if (isset($_SESSION['api_error'])) {
         echo ($_SESSION['api_error']);
+        //clear session variable 'api_error' when flash message is shown
+        unset($_SESSION['api_error']);
       }
 
       

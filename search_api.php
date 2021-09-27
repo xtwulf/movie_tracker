@@ -60,9 +60,9 @@ function executeRESTCall($methode, $adresse, $daten = false) {
         
         }
 
-     
 
         foreach ($result as $key => $value) {
+            // check if $key is in $display array (settings.php)
             if (in_array($key, $display)) {
                 echo ($key . ':' . $value .'<br>');
              }
