@@ -43,6 +43,12 @@ if (isset($_POST['filmname'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
     -->
 
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
 
     <!-- custom css -->
     <link href="style.css" rel="stylesheet">
@@ -91,7 +97,7 @@ if (isset($_POST['filmname'])) {
       </form>
     </div>
     <div>
-      <h2>My films</h2>
+      <h2>My favorite films</h2>
       <p>
       <?php if(isset($_SESSION['message'])) {
         echo ($_SESSION['message']);
@@ -109,22 +115,39 @@ if (isset($_POST['filmname'])) {
       // SQL statement, loading favorite films for user
       
       
-      $stmt = $pdo->prepare('SELECT * FROM favourites WHERE user_id = :uid');
+      $stmt = $pdo->prepare('SELECT title, plot_short, imdbID, preview FROM favourites WHERE user_id = :uid');
       $stmt->execute(array(':uid' => $_SESSION['user_id']));
 
+      // print out the favorite films
+
       $row = $stmt->fetchAll();
-      foreach($row as $key => $value) {
-        print_r($value);
-      }
-      
-  
-
-      
-      
-
-
 
       ?>
+  
+      <?php
+      
+      foreach($row as $key => $value) {
+
+        echo('
+        <div class="card" style="width: 18rem;">
+          <img src="'.$value[3].'" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">'.$value[0].'</h5>
+            <p class="card-text">'.$value[1].'</p>
+            <a href="#" class="btn btn-primary"><button>Go to detail page</button></a>
+            <a href="#" class="btn btn-primary"><button>remove from favorites</button></a>
+        </div>
+        ');
+        
+
+        echo($key . ": " . $value[0]);
+        echo('<br>');        
+        echo('<br>');
+      }
+      
+      ?>
+
+    </table>
 <!--
       <div class="card" style="width: 18rem;">
         <img src="https://m.media-amazon.com/images/M/MV5BMTI5Mjg1MzM4NF5BMl5BanBnXkFtZTcwNTAyNzUzMw@@._V1_SX300.jpg" class="card-img-top" alt="...">
