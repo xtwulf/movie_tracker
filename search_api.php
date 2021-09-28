@@ -1,6 +1,5 @@
 <?php
 include ('settings.php');
-echo("Debug: ".$debug);
 
 session_start();
 

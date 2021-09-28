@@ -77,7 +77,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ulf Wilke - Profile Edit</title>
+    <title>Movie Tracker</title>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
 

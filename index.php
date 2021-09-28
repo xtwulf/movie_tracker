@@ -90,17 +90,42 @@ if (isset($_POST['filmname'])) {
       ?>
       </form>
     </div>
-    <div>My films</div>
+    <div>
+      <h2>My films</h2>
+      <p>
+      <?php if(isset($_SESSION['message'])) {
+        echo ($_SESSION['message']);
+        unset($_SESSION['message']);
+        }
+      ?>
+      </p>
+
+    </div>
+
 
     <div class="container">
       <?php
 
       // SQL statement, loading favorite films for user
       
+      
+      $stmt = $pdo->prepare('SELECT * FROM favourites WHERE user_id = :uid');
+      $stmt->execute(array(':uid' => $_SESSION['user_id']));
+
+      $row = $stmt->fetchAll();
+      foreach($row as $key => $value) {
+        print_r($value);
+      }
+      
+  
+
+      
+      
 
 
 
       ?>
+<!--
       <div class="card" style="width: 18rem;">
         <img src="https://m.media-amazon.com/images/M/MV5BMTI5Mjg1MzM4NF5BMl5BanBnXkFtZTcwNTAyNzUzMw@@._V1_SX300.jpg" class="card-img-top" alt="...">
         <div class="card-body">
@@ -110,6 +135,7 @@ if (isset($_POST['filmname'])) {
         <a href="#" class="btn btn-primary"><button>remove from favorites</button></a>
         
       </div>
+      -->
     </div>
     </div>
 
