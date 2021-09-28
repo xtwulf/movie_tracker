@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('settings.php');
 
 // Including Database connection
 require_once "pdo.php";
@@ -9,9 +10,13 @@ if (isset($_SESSION['test'])) {
   echo $_SESSION['test'];
 }
 
-print_r ($_SESSION);
-echo ('<br>');
-print_r ($_POST);
+if ($debug) {
+  print_r ($_SESSION);
+  echo ('<br>');
+  echo ('<br>');
+  print_r ($_POST);
+  
+}
 
 if (isset($_POST['filmname'])) {
   $_SESSION['filmname'] = str_replace(' ','+',$_POST['filmname']);

@@ -11,9 +11,15 @@ if ($debug) {
     
 }
 
-// Redirect the browser to index.php if Cancel is pressed
+// Redirect the browser to index.php if "Cancel" is clicked
 if ( isset($_POST['cancel'] ) ) {
     header("Location: index.php");
+    return;
+}
+
+// load add.php if "add to favourites" is clicked
+if (isset($_POST['add'])) {
+    header('location: add.php');
     return;
 }
 
@@ -73,7 +79,7 @@ function executeRESTCall($methode, $adresse, $daten = false) {
 
     ?>
 <form method="POST">
-    <input type="submit" value="Save Film">
+    <input type="submit" name = "add" value="Add to favourites">
     <input type="submit" name="cancel" value="Cancel">
 </form>
 
