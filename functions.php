@@ -14,7 +14,7 @@ function executeRESTCall($methode, $adresse, $daten = false) {
     return curl_exec($curl);
 }
 
-// Check if year is valid, otherwise a 'N/A' is written
+// remove non numeric characters from year --> there are some films with non numeric numbers in year response
 function checkYear($year) {
 
 $re = '/\d{4}/m';
@@ -22,16 +22,9 @@ $str = $year;
 
 preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
-// Print the entire match result
-print_r ($matches);
-
 return $matches[0][0];
 
-/*     if (is_numeric($year) && (strlen($year) == 4)) {
-        return $year;
-    }
 
-    return ('N/A'); */
 }
 
 ?>

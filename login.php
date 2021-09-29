@@ -1,11 +1,16 @@
 <?php
 session_start();
-echo ("Post: ");
-print_r($_POST);
-echo '<br>';
-echo ("Session: ");
-print_r($_SESSION);
-echo '<br>'; 
+include ('settings.php');
+if ($debug) {
+    echo ("Post: ");
+    print_r($_POST);
+    echo '<br>';
+    echo ("Session: ");
+    print_r($_SESSION);
+    echo '<br>'; 
+
+}
+
 
 // Connecting to database
 require_once 'pdo.php';
@@ -48,13 +53,9 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     $stmt->execute(array( ':un' => $_POST['user'], ':pw' => $check));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
     if ( $row !== false ) {
-
         $_SESSION['name'] = $row['username'];
         $_SESSION['user_id'] = $row['id'];
-
-        
         // Redirect the browser to index.php
         header("Location: index.php");        
         return;

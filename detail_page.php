@@ -1,18 +1,25 @@
 <?php
 
 session_start();
+
+include('settings.php');
+
 // Connecting to database
 require_once 'pdo.php';
 
 include 'functions.php';
 
-//print_r($_POST);
-print_r($_SESSION);
 
+
+// Redirect the browser to index.php if "Back to home" is clicked
+if ( isset($_POST['back'] ) ) {
+    header("Location: index.php");
+    return;
+}
 
 ?>
 
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,14 +30,12 @@ print_r($_SESSION);
 <body>
     <?php
         $imdbid = $_SESSION['detail'];
-        $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&i=tt0112442', true)));
+        $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&i='.$imdbid, true)));
         // echo (executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'));
-        if ($debug) {
-            echo ('$result: ');
-            print_r($result);
-            echo('<br>');
-            var_dump($result ,true);
-        }
+
+        //convert object vars to an array
+        $result = get_object_vars($result);
+
 
         if ($result['Response'] == "False") {
             echo ($result['Error']);
@@ -50,7 +55,7 @@ print_r($_SESSION);
         $_SESSION['search_result'] = $result;
     ?>
 <form method="POST">
-    <input type="submit" name="cancel" value="Cancel">
+    <input type="submit" name="back" value="Back to Home">
 </form>
 
 </body>
