@@ -43,7 +43,7 @@ $stmt->execute(array(
 $_SESSION['message'] = "\"".$_SESSION['search_result']['Title'] . "\" was added successfully to favorites";
 
 header('location: index.php');
-//echo ("<br><a href = 'http://localhost:8888/movie_tracker/'>Add called</a>")
+
 ?>
 
 
