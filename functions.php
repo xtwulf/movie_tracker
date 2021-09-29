@@ -16,15 +16,11 @@ function executeRESTCall($methode, $adresse, $daten = false) {
 
 // remove non numeric characters from year --> there are some films with non numeric numbers in year response
 function checkYear($year) {
-
 $re = '/\d{4}/m';
 $str = $year;
-
 preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
 return $matches[0][0];
-
-
 }
 
 ?>
