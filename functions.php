@@ -14,4 +14,14 @@ function executeRESTCall($methode, $adresse, $daten = false) {
     return curl_exec($curl);
 }
 
+// Check if year is valid, otherwise a 'N/A' is written
+function checkYear($year) {
+
+    if (is_numeric($year) && (strlen($year) == 4)) {
+        return $year;
+    }
+
+    return ('N/A');
+}
+
 ?>
