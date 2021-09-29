@@ -21,7 +21,7 @@ if ( isset($_POST['cancel'] ) ) {
 <body>
     
 <?php
-echo ('<h1>Register</h1>')
+echo ('<h1>Register</h1><p>not working yet</p>')
 ?>
 <form method="POST">
 

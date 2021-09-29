@@ -1,4 +1,9 @@
-# 
+
+# ToDo
+- handling several search results
+- local table for film information separate and reference from user id or make an api call for the overview site every time (not stored for every user)
+- check if the film already exists for this user, when trying add to favourites
+- register functionality
 
 # OMDB API
 API key: 2bfa0b8a
@@ -17,9 +22,6 @@ DB name: movie_tracker
 
 
 
-# ToDo
-- handling several search results
-- local table for film information separate and reference from user id or make an api call for the overview site every time (not stored for every user)
-- check if the film already exists for this user, when trying add to favourites
+
 
 
