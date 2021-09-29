@@ -1,7 +1,8 @@
 <?php
 /* 
 To Do: 
-- Check, if film already exists for this user in favourites table
+- Check, if film already exists for this user in favorites table
+
 
 
 */
@@ -19,19 +20,23 @@ if ($debug) {
     
 }
 
+if ($_SESSION['search_result']['Poster'] == "" ) {
+    $_SESSION['search_result']['Poster'] = "/img/default-image.jpeg";
+}
 
-$stmt = $pdo->prepare('INSERT INTO favourites (id, user_id, title, plot_short, imdbID, preview ) VALUES ( :id, :us_id, :title, :plot_short, :imdbid, :preview )');
+$stmt = $pdo->prepare('INSERT INTO favorites (id, user_id, title, year, plot_short, imdbID, preview ) VALUES ( :id, :us_id, :title, :year, :plot_short, :imdbid, :preview )');
 $stmt->execute(array(
     ':id' => NULL,
     ':us_id' => $_SESSION['user_id'],
     ':title' => $_SESSION['search_result']['Title'],
+    ':year' => $_SESSION['search_result']['Year'],
     ':plot_short' => $_SESSION['search_result']['Plot'],
     ':imdbid' => $_SESSION['search_result']['imdbID'],
     ':preview' => $_SESSION['search_result']['Poster']
 
 ));
 
-$_SESSION['message'] = "\"".$_SESSION['search_result']['Title'] . "\" was added successfully to favourites";
+$_SESSION['message'] = "\"".$_SESSION['search_result']['Title'] . "\" was added successfully to favorites";
 
 header('location: index.php');
 //echo ("<br><a href = 'http://localhost:8888/movie_tracker/'>Add called</a>")

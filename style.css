@@ -1,3 +1,8 @@
 div {
     border: solid 1px red;
 }
+
+.card-img-top {
+
+    height: 10%;
+}

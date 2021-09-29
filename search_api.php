@@ -1,5 +1,6 @@
 <?php
 include ('settings.php');
+include ('functions.php');
 
 session_start();
 
@@ -22,19 +23,7 @@ if (isset($_POST['add'])) {
     return;
 }
 
-function executeRESTCall($methode, $adresse, $daten = false) {
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $adresse);
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $methode);
-    if ($daten){
-        $head = ['Content-Type: application/text', 
-                 'Content-Length: '. strlen($daten)];
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $head);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $daten);
-    }
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    return curl_exec($curl);
-}
+
 
 ?>
 
@@ -74,8 +63,6 @@ function executeRESTCall($methode, $adresse, $daten = false) {
 
         }      
         $_SESSION['search_result'] = $result;
-    
-
     ?>
 <form method="POST">
     <input type="submit" name = "add" value="Add to favourites">
