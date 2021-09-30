@@ -80,32 +80,31 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Tracker</title>
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-
-<!-- <script src = "doValidate.js"></script>   -->
-<script>
-function doValidate() {
-    console.log('Validating...');
-    
-        addr = document.getElementById('1d_1').value;
-        pw = document.getElementById('id_1723').value;
-      
-        console.log("Validating addr="+addr+" pw="+pw);
-        if (addr == null || addr == "" || pw == null || pw == "") {
-            alert("Both fields must be filled out");
+    <!-- <script src = "doValidate.js"></script>   -->
+    <script>
+    function doValidate() {
+        console.log('Validating...');
+        
+            addr = document.getElementById('1d_1').value;
+            pw = document.getElementById('id_1723').value;
+        
+            console.log("Validating addr="+addr+" pw="+pw);
+            if (addr == null || addr == "" || pw == null || pw == "") {
+                alert("Both fields must be filled out");
+                return true;
+            }
+            if ( addr.indexOf('@') == -1 ) {
+                alert("Invalid email address");
+                return true;
+            }
             return true;
-        }
-        if ( addr.indexOf('@') == -1 ) {
-            alert("Invalid email address");
-            return true;
-        }
-        return true;
-    
-}
-</script>
+        
+    }
+    </script>
 
 </head>
 

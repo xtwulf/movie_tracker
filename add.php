@@ -40,7 +40,7 @@ $stmt->execute(array(
 
 ));
 
-$_SESSION['message'] = "\"".$_SESSION['search_result']['Title'] . "\" was added successfully to favorites";
+$_SESSION['message'] = "<p class = \"success\">\"".$_SESSION['search_result']['Title'] . "\" was added successfully to favorites</p>";
 
 header('location: index.php');
 

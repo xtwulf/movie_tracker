@@ -23,8 +23,6 @@ if (isset($_POST['add'])) {
     return;
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +32,13 @@ if (isset($_POST['add'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 </head>
 <body>
+    <div class = "container">
     <?php
         $filmname = $_SESSION['filmname'];
         $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'), true));
@@ -64,10 +67,11 @@ if (isset($_POST['add'])) {
         }      
         $_SESSION['search_result'] = $result;
     ?>
-<form method="POST">
-    <input type="submit" name = "add" value="Add to favourites">
-    <input type="submit" name="cancel" value="Cancel">
-</form>
+    <form method="POST">
+        <input type="submit" name = "add" value="Add to favourites">
+        <input type="submit" name="cancel" value="Cancel">
+    </form>
+    </div>
 
 </body>
 </html>

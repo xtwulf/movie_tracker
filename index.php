@@ -59,44 +59,33 @@ if (isset($_POST['remove'])) {
     <title>Movie Tracker</title>
   </head>
   <body>
+    <div class = "container">
+      <h1>Welcome to Movie Tracker</h1>
     <div>
-    <h1>Welcome to Movie Tracker</h1>
-
-
-  </div>
-  <div>
     <?php
-
-    if (!isset($_SESSION['name'])) {
-      
+      if (!isset($_SESSION['name'])) {
       echo '<a href="login.php"><p>Please log in to use the application</p></a>';
-
       echo '<a href = "register.php"><p>No account yet? Register here</p></a>';
       die;
-    }
-    else {
-      echo '<a href="logout.php"><p>logout</p></a>';
-      
-    }
+      }
+      else {
+        echo '<a href="logout.php"><p>logout</p></a>';
+      }
     ?>
     </div>
 
-        
     <div>
       <form method="POST">
-      <label for="name">Film name</label>
-      <input type="text" name="filmname" id="search_1" value=""><br/>
-      <input type="submit" name="search" value="Search">
-      <?php
-      if (isset($_SESSION['api_error'])) {
-        echo ($_SESSION['api_error']);
-        //clear session variable 'api_error' when flash message is shown
-        unset($_SESSION['api_error']);
-      }
-
-      
-
-      ?>
+        <label for="name">Film name</label>
+        <input type="text" name="filmname" id="search_1" value=""><br/>
+        <input type="submit" name="search" value="Search">
+        <?php
+        if (isset($_SESSION['api_error'])) {
+          echo ($_SESSION['api_error']);
+          //clear session variable 'api_error' when flash message is shown
+          unset($_SESSION['api_error']);
+        } 
+        ?>
       </form>
     </div>
     <div>
@@ -108,27 +97,16 @@ if (isset($_POST['remove'])) {
         }
       ?>
       </p>
-
     </div>
 
 
     <div class="container">
       <?php
-
       // SQL statement, loading favorite films for user
-      
-      
       $stmt = $pdo->prepare('SELECT title, plot_short, imdbID, preview, year, id FROM favorites WHERE user_id = :uid');
       $stmt->execute(array(':uid' => $_SESSION['user_id']));
-
       // print out the favorite films
-
       $row = $stmt->fetchAll();
-
-      ?>
-  
-      <?php
-      
       foreach($row as $key => $value) {
       
         echo('
@@ -150,8 +128,6 @@ if (isset($_POST['remove'])) {
           
         </div>
         ');
-        
-
      
       }
       
