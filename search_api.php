@@ -41,14 +41,35 @@ if (isset($_POST['add'])) {
     <div class = "container">
     <?php
         $filmname = $_SESSION['filmname'];
-        $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'), true));
-        // echo (executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&t=%22'.$filmname.'%22&plot=full'));
-        if ($debug) {
-            echo ('$result: ');
-            print_r($result);
+        $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&s=%22'.$filmname.'%22&plot=full'), true));
+        // echo (executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&s=%22'.$filmname.'%22&plot=full'));
+        if (!$debug) {
+
+            echo("Your search has several hits. Please select below:<br>");
+            echo ("####################");
             echo('<br>');
-            var_dump($result ,true);
-        }
+            foreach ($result['Search'] as $element) {
+                if ($element['Type'] == 'movie') {
+                    print_r($element);
+                    echo('<br>');
+                    echo ('
+                    <form>
+                        <input type = "submit" name="Test" value ="test">
+                    ');
+                    echo('<br>');
+                    echo('<br>');
+                }
+            }
+            $_SESSION['search_result'] = $result;
+            echo ('<pre>');
+            print_r($_SESSION);
+            echo ('</pre>');
+
+        
+
+            
+            die;
+           }
 
         if ($result['Response'] == "False") {
             echo ($result['Error']);
@@ -58,14 +79,14 @@ if (isset($_POST['add'])) {
         }
 
 
-        foreach ($result as $key => $value) {
+      /*   foreach ($result as $key => $value) {
             // check if $key is in $display array (settings.php)
             if (in_array($key, $display)) {
                 echo ($key . ':' . $value .'<br>');
-             }
+             } 
 
-        }      
-        $_SESSION['search_result'] = $result;
+        }  */   
+       
     ?>
     <form method="POST">
         <input type="submit" name = "add" value="Add to favourites">
