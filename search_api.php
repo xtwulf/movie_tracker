@@ -1,13 +1,23 @@
 <?php
+
+/* 
+ToDo:
+- add pagination
+
+*/
 include ('settings.php');
 include ('functions.php');
 
 session_start();
 
 if ($debug) {
+    echo('<pre>');
     print_r ($_SESSION);
+    echo('</pre>');
     echo ("<br>");
+    echo('<pre>');
     print_r ($_POST);
+    echo('</pre>');
     
 }
 
@@ -17,8 +27,12 @@ if ( isset($_POST['cancel'] ) ) {
     return;
 }
 
-// load add.php if "add to favourites" is clicked
+// load add.php if "add to favorites" is clicked
 if (isset($_POST['add'])) {
+    echo('<pre>');
+    print_r($_POST);
+
+    die;
     header('location: add.php');
     return;
 }
@@ -42,34 +56,54 @@ if (isset($_POST['add'])) {
     <?php
         $filmname = $_SESSION['filmname'];
         $result = (json_decode(executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&s=%22'.$filmname.'%22&plot=full'), true));
-        // echo (executeRESTCall('GET', 'https://www.omdbapi.com/?apikey=2bfa0b8a&s=%22'.$filmname.'%22&plot=full'));
-        if (!$debug) {
-
             echo("Your search has several hits. Please select below:<br>");
             echo ("####################");
             echo('<br>');
             foreach ($result['Search'] as $element) {
                 if (($element['Type'] == 'movie') || ($element['Type'] == 'series') ) {
-                    print_r($element);
+                    //Assign default image if 'N/A'
+                    if ($element['Poster'] == 'N/A') {
+                        $img = 'img/default-image.jpeg';
+                    }
+                    else {$img = $element['Poster'];}
+
+                    echo('Title: ' . $element['Title']);
                     echo('<br>');
+                    echo('Year: ' . $element['Year']);
+                    echo('<br>');
+                    echo('<img style = "width: 100px;" src="'.$img.'">');
                     echo ('
-                    <form>
-                        <input type = "submit" name="Test" value ="test">
+                    <form method = "post">
+                        <input type = "hidden" value = "'.$element['imdbID'].'" name = "'.$element['imdbID'].'">
+                        <input type = "submit" name = "add" value = "Add to favorites">
+                    </form>
                     ');
                     echo('<br>');
                     echo('<br>');
                 }
             }
+            echo('
+                <form method="post">
+                    <input type="submit" name="cancel" value="Cancel">
+                </form>
+            ');
+
+            echo ('
+
+                <form  action="add.php" method="post">
+                <input type="hidden" name="vorname" value="test"><br />
+                Namename: <input type="text" name="nachname" /><br />
+                <input type="Submit" value="add" name="add"/>
+                </form>
+            ');
+
+
+
             $_SESSION['search_result'] = $result;
             echo ('<pre>');
             print_r($_SESSION);
             echo ('</pre>');
 
-        
-
-            
-            die;
-           }
 
         if ($result['Response'] == "False") {
             echo ($result['Error']);
@@ -77,21 +111,13 @@ if (isset($_POST['add'])) {
             header('location: index.php');
         
         }
-
-
-      /*   foreach ($result as $key => $value) {
-            // check if $key is in $display array (settings.php)
-            if (in_array($key, $display)) {
-                echo ($key . ':' . $value .'<br>');
-             } 
-
-        }  */   
+ 
        
     ?>
-    <form method="POST">
+<!--     <form method="POST">
         <input type="submit" name = "add" value="Add to favourites">
         <input type="submit" name="cancel" value="Cancel">
-    </form>
+    </form> -->
     </div>
 
 </body>

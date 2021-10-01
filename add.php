@@ -14,12 +14,22 @@ include ('functions.php');
 
 session_start();
 
-if ($debug) {
+/*     echo('<pre>');
+    echo("Session:");
+    echo("<br>");
     print_r ($_SESSION);
-    echo ("<br>");
+    echo('</pre>');
+    echo ("<br>"); */
+
+
+    echo('<pre>');
+    echo("Post:");
+    echo("<br>");
     print_r ($_POST);
+    echo('</pre>');
+    die;
     
-}
+
 
 if ($_SESSION['search_result']['Poster'] == "" ) {
     $_SESSION['search_result']['Poster'] = "/img/default-image.jpeg";
