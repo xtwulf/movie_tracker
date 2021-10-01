@@ -112,7 +112,7 @@ if (isset($_POST['remove'])) {
         echo('
         <div class="card" style="width: 18rem; display: flex;">
     
-          <img src="'.$value[3].'" class="card-img-top" alt="...">
+          <img style="width: 50%; height: 50%;" src="'.$value[3].'" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">'.$value[0].'<br>
             '.$value[4].'</h5>
