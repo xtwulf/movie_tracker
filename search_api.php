@@ -49,7 +49,7 @@ if (isset($_POST['add'])) {
             echo ("####################");
             echo('<br>');
             foreach ($result['Search'] as $element) {
-                if ($element['Type'] == 'movie') {
+                if (($element['Type'] == 'movie') || ($element['Type'] == 'series') ) {
                     print_r($element);
                     echo('<br>');
                     echo ('
