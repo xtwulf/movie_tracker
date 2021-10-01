@@ -18,7 +18,10 @@ function executeRESTCall($methode, $adresse, $daten = false) {
 function checkYear($year) {
 $re = '/\d{4}/m';
 $str = $year;
+
+
 preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+
 
 return $matches[0][0];
 }
